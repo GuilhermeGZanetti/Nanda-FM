@@ -39,9 +39,12 @@ export default class gameScene extends Phaser.Scene {
     };
 
     preload(){
+
         this.canvas = this.sys.game.canvas;
 
         this.load.image('blackener', 'assets/black.png');
+        this.load.image('restart', 'assets/cycle.png');
+        this.load.image('house', 'assets/house.png');
 
         this.load.image('bg_play', 'assets/playarea.png');
         this.load.image('correct_input_area', 'assets/correct_input_area.png')
@@ -54,23 +57,23 @@ export default class gameScene extends Phaser.Scene {
             case 1:
                 this.load.image('bg', 'assets/tempo_bg.jpg');
                 //  Firefox doesn't support mp3 files, so use ogg
-                this.load.audio('tempo_song', ['assets/songs/o_tempo.mp3', 'assets/songs/o_tempo.ogg']);
+                this.load.audio('song_file', ['assets/songs/o_tempo.mp3', 'assets/songs/o_tempo.ogg']);
                 //Load song inputs
                 this.load.text('inputs_song', 'assets/song_inputs/o_tempo_inputs.txt');
                 break;
             case 2:
                 this.load.image('bg', 'assets/gray_bg.png');
-                this.load.audio('tempo_song', ['assets/songs/american_idiot.mp3', 'assets/songs/american_idiot.ogg']);
+                this.load.audio('song_file', ['assets/songs/american_idiot.mp3', 'assets/songs/american_idiot.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/american_idiot_inputs.txt');
                 break;
             case 3:
                 this.load.image('bg', 'assets/gray_bg.png');
-                this.load.audio('tempo_song', ['assets/songs/bulletproof_heart.mp3', 'assets/songs/bulletproof_heart.ogg']);
+                this.load.audio('song_file', ['assets/songs/bulletproof_heart.mp3', 'assets/songs/bulletproof_heart.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/bulletproof_heart_inputs.txt');
                 break;
             case 4:
                 this.load.image('bg', 'assets/gray_bg.png');
-                this.load.audio('tempo_song', ['assets/songs/mind_over_matter.mp3', 'assets/songs/mind_over_matter.ogg']);
+                this.load.audio('song_file', ['assets/songs/mind_over_matter.mp3', 'assets/songs/mind_over_matter.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/mind_over_matter_inputs.txt');
                 break;
         }
@@ -111,13 +114,28 @@ export default class gameScene extends Phaser.Scene {
 
         
         //Show score
-
         this.add.image(this.play_area_width+10, 20, 'score_bg').setOrigin(0,0).setScale(0.4,0.4);
         this.score_text = this.add.text(this.play_area_width+90, 60, '0', { fontSize: '20px', fill: '#00000' });
         this.score_text.setOrigin(0.5,0);
 
+        //Load home and restart buttons
+        let btn_restart = this.add.image(480, 50, 'restart').setScale(0.1).setInteractive({ cursor: 'pointer' });
+        let btn_home = this.add.image(550, 50, 'house').setScale(0.1).setInteractive({ cursor: 'pointer' });
+
         //Load song
-        this.song = this.sound.add('tempo_song');
+        this.song = this.sound.add('song_file');
+
+        btn_restart.on('pointerdown', ()=>{
+            this.song.stop();
+            this.scene.stop();
+            this.scene.start("gameScene", this.scene.song_num);
+            
+        });
+        btn_home.on('pointerdown', ()=>{
+            this.song.stop();
+            this.scene.start("menuScene");
+            this.scene.stop();
+        });
     
         this.time.delayedCall(1000, () => {
             this.song.play(); 
@@ -126,7 +144,10 @@ export default class gameScene extends Phaser.Scene {
 
     update(timestep, dt){
         if(this.array_inputs.length <= 0){
-            return; //GANHOU A MUSICA
+            //GANHOU A MUSICA
+            this.song.stop();
+            this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
+            this.scene.stop();
         }
         if(this.game_is_playing && this.song.isPlaying){
             //update inputs positions and draw them
@@ -145,10 +166,10 @@ export default class gameScene extends Phaser.Scene {
             }
             this.score_text.text = Math.round(this.score);
         }
-        if(this.qtdErros >= this.qtdErrosMax){
+        if(this.qtd_erros >= this.qtd_erros_max){
             //Perdeu!
             this.song.stop();
-            this.scene.start("menuScene", this.score);
+            this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
             this.scene.stop();
         }
     };
@@ -182,10 +203,10 @@ export default class gameScene extends Phaser.Scene {
                         this.scene.score += 50; //Quanto mais perto do meio mais pontos ganha
                         this.scene.feedbackAcerto(event.keyCode, 2);
                     } else if(erro < 30){ // bom
-                        this.scene.score += 30; //Quanto mais perto do meio mais pontos ganha
+                        this.scene.score += 40; //Quanto mais perto do meio mais pontos ganha
                         this.scene.feedbackAcerto(event.keyCode, 1);
                     }else { // Regular
-                        this.scene.score += 10; //Quanto mais perto do meio mais pontos ganha
+                        this.scene.score += 20; //Quanto mais perto do meio mais pontos ganha
                         this.scene.feedbackAcerto(event.keyCode, 0);
                     }
                     
