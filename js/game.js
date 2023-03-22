@@ -9,6 +9,10 @@ var config = {
     physics: {
         default: 'arcade',
     },
+    fps: {
+        target: 60,
+        forceSetTimeOut: true
+    },
     scene: [
         menuScene,
         gameScene,
