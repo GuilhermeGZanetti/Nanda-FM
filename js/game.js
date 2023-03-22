@@ -10,8 +10,7 @@ var config = {
         default: 'arcade',
     },
     fps: {
-        target: 60,
-        forceSetTimeOut: true
+        target: 30,
     },
     scene: [
         menuScene,
