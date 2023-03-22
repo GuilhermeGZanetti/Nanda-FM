@@ -9,7 +9,7 @@ import os
 #Start measuring time
 time_start = 0
 time_click = 0
-arquivo_inputs = open('assets/song_inputs/o_tempo_inputs.txt', 'w')
+arquivo_inputs = open('assets/song_inputs/bulletproof_heart_inputs.txt', 'w')
 sair = False
 
 q_code = 81
@@ -45,7 +45,7 @@ def onKeyboardEvent(event):
 
     time_click = time.time()
 
-    length = int(1000*(time_click - time_start))
+    length = int(1000*(time_click - time_start)/2)
 
     #Write the length to the .txt and break line
     arquivo_inputs.write(str(length)+"\n")

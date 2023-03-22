@@ -17,11 +17,11 @@ export default class messageScene extends Phaser.Scene {
                 break;
             case 2:
                 this.song_name = "American Idiot";
-                this.medal = this.getMedal(this.score, 608*50);
+                this.medal = this.getMedal(this.score, 482*50);
                 break;
             case 3:
                 this.song_name = "Bulletproof Heart";
-                this.medal = this.getMedal(this.score, 608*50);
+                this.medal = 'gold';//this.getMedal(this.score, 658*50);
                 break;
             case 4:
                 this.song_name = "Mind over Matter";

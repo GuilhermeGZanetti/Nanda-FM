@@ -29,7 +29,7 @@ export default class gameScene extends Phaser.Scene {
         this.key_is_pressed = Array(100).fill(false);;
 
         this.array_inputs = []
-        this.start_delay = [0, 1450, 1000, 1000, 1000];
+        this.start_delay = [0, 1450, 3000, 1080, 1000];
         
         this.score = 0;
         this.qtdErros = 0;
@@ -62,12 +62,12 @@ export default class gameScene extends Phaser.Scene {
                 this.load.text('inputs_song', 'assets/song_inputs/o_tempo_inputs.txt');
                 break;
             case 2:
-                this.load.image('bg', 'assets/gray_bg.png');
+                this.load.image('bg', 'assets/american.jpg');
                 this.load.audio('song_file', ['assets/songs/american_idiot.mp3', 'assets/songs/american_idiot.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/american_idiot_inputs.txt');
                 break;
             case 3:
-                this.load.image('bg', 'assets/gray_bg.png');
+                this.load.image('bg', 'assets/bulletproof.png');
                 this.load.audio('song_file', ['assets/songs/bulletproof_heart.mp3', 'assets/songs/bulletproof_heart.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/bulletproof_heart_inputs.txt');
                 break;
@@ -124,6 +124,7 @@ export default class gameScene extends Phaser.Scene {
 
         //Load song
         this.song = this.sound.add('song_file');
+        this.song.setRate(this.song_speed);
 
         btn_restart.on('pointerdown', ()=>{
             this.song.stop();
@@ -133,8 +134,8 @@ export default class gameScene extends Phaser.Scene {
         });
         btn_home.on('pointerdown', ()=>{
             this.song.stop();
-            this.scene.start("menuScene");
             this.scene.stop();
+            this.scene.start("menuScene");
         });
     
         this.time.delayedCall(1000, () => {
@@ -144,12 +145,17 @@ export default class gameScene extends Phaser.Scene {
 
     update(timestep, dt){
         if(this.array_inputs.length <= 0){
+            this.timeElapsed+=dt;
+            if(this.timeElapsed > 2000){
+                this.song.stop();
+                this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
+                this.scene.stop();
+            }
             //GANHOU A MUSICA
-            this.song.stop();
-            this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
-            this.scene.stop();
+            return;
         }
         if(this.game_is_playing && this.song.isPlaying){
+            this.song.setRate(this.song_speed);
             //update inputs positions and draw them
             let movementY = this.song_speed*this.tamanho_segundo * dt/1000;
             for (let i=0; i<this.array_inputs.length; i++){
@@ -162,7 +168,6 @@ export default class gameScene extends Phaser.Scene {
                 this.score -= 50;
                 this.array_inputs[0].gameObject.destroy();
                 this.array_inputs.shift(); //Retira o primeiro elemento
-                this.count+=1;
             }
             this.score_text.text = Math.round(this.score);
         }
@@ -203,7 +208,7 @@ export default class gameScene extends Phaser.Scene {
                         this.scene.score += 50; //Quanto mais perto do meio mais pontos ganha
                         this.scene.feedbackAcerto(event.keyCode, 2);
                     } else if(erro < 30){ // bom
-                        this.scene.score += 40; //Quanto mais perto do meio mais pontos ganha
+                        this.scene.score += 30; //Quanto mais perto do meio mais pontos ganha
                         this.scene.feedbackAcerto(event.keyCode, 1);
                     }else { // Regular
                         this.scene.score += 20; //Quanto mais perto do meio mais pontos ganha
@@ -290,12 +295,14 @@ export default class gameScene extends Phaser.Scene {
 
         this.text_feedback.setText("");
 
-        if(this.qtd_erros > this.qtd_erros_max){
-            //End game
-        }
+        this.count+=1;
+        console.log(this.count);
     }
 
     feedbackAcerto(keyCode, tipoAcerto){
+        this.count+=1;
+        console.log(this.count);
+
         this.qtd_erros-=0.2*tipoAcerto;
         if(this.qtd_erros < 0) {this.qtd_erros = 0}
 
@@ -336,4 +343,6 @@ export default class gameScene extends Phaser.Scene {
                 break;
         }
     }
+
+    
 }
