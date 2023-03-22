@@ -21,7 +21,7 @@ export default class messageScene extends Phaser.Scene {
                 break;
             case 3:
                 this.song_name = "Bulletproof Heart";
-                this.medal = 'gold';//this.getMedal(this.score, 658*50);
+                this.medal = this.getMedal(this.score, 658*50);
                 break;
             case 4:
                 this.song_name = "Mind over Matter";
@@ -54,8 +54,8 @@ export default class messageScene extends Phaser.Scene {
             this.scene.start("gameScene", this.scene.song_num);
         });
         btn_home.on('pointerdown', ()=>{
-            this.scene.start("menuScene");
             this.scene.stop();
+            this.scene.start("menuScene");
         });
 
         // song name text

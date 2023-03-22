@@ -29,7 +29,7 @@ export default class gameScene extends Phaser.Scene {
         this.key_is_pressed = Array(100).fill(false);;
 
         this.array_inputs = []
-        this.start_delay = [0, 1450, 3000, 1080, 1000];
+        this.start_delay = [0, 1450, 3000, 1100, 1000];
         
         this.score = 0;
         this.qtdErros = 0;
@@ -39,8 +39,12 @@ export default class gameScene extends Phaser.Scene {
     };
 
     preload(){
-
         this.canvas = this.sys.game.canvas;
+
+        //Remove cache
+        this.textures.remove('bg');
+        this.cache.audio.getKeys().forEach((key) => this.cache.audio.remove(key));
+        this.cache.text.getKeys().forEach((key) => this.cache.text.remove(key));
 
         this.load.image('blackener', 'assets/black.png');
         this.load.image('restart', 'assets/cycle.png');
@@ -125,6 +129,7 @@ export default class gameScene extends Phaser.Scene {
         //Load song
         this.song = this.sound.add('song_file');
         this.song.setRate(this.song_speed);
+        this.song.setVolume(0.35);
 
         btn_restart.on('pointerdown', ()=>{
             this.song.stop();
@@ -148,8 +153,8 @@ export default class gameScene extends Phaser.Scene {
             this.timeElapsed+=dt;
             if(this.timeElapsed > 2000){
                 this.song.stop();
-                this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
                 this.scene.stop();
+                this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
             }
             //GANHOU A MUSICA
             return;
@@ -174,8 +179,8 @@ export default class gameScene extends Phaser.Scene {
         if(this.qtd_erros >= this.qtd_erros_max){
             //Perdeu!
             this.song.stop();
-            this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
             this.scene.stop();
+            this.scene.start("messageScene", {song_num: this.song_num, score: this.score});
         }
     };
 
@@ -296,12 +301,12 @@ export default class gameScene extends Phaser.Scene {
         this.text_feedback.setText("");
 
         this.count+=1;
-        console.log(this.count);
+        //console.log(this.count);
     }
 
     feedbackAcerto(keyCode, tipoAcerto){
         this.count+=1;
-        console.log(this.count);
+        //console.log(this.count);
 
         this.qtd_erros-=0.2*tipoAcerto;
         if(this.qtd_erros < 0) {this.qtd_erros = 0}
