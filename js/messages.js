@@ -18,7 +18,15 @@ const messages = {
         'te deixe feliz, ainda mais com você desanimada com seu aniversário nesse momento...\n'+
         'Eu te amo demais, e desejo tudo de melhor para você.\n'+
         'Minha maior alegria realmente tem sido saber que você está feliz (tipo com o drone).',
-        "4": "Impressionante! Você tocou esta música com perfeição.",
+        "4": 
+        "Feliz aniversário AMOR!!! Nâo sei se pulou alguma música mas essa deveria ser sua\n"+
+        'última mensagem, então é isso. Espero que tenha curtido meu presente e que eu não\n'+
+        'tenha roubado sua ideia. Te desejo mais um (e muitos mais) ótimos anos de vida\n'+
+        'e espero que eu esteja aí com você nos próximos aniversários até ficarmos velhinhos.\n'+
+        'Eu te amo demais demais demais, e não tem presente que representaria o que sinto\n'+
+        'mas espero que esse tenha chegado perto. O único problema agora é que n sei se consigo\n'+
+        'te dar algo melhor ano que vem kkkkkkk então não eleve muito as expectativas com isso :P\n'+
+        'Parabéns, Fe! Pelo aniversário e por ter concluído a rádio Nanda FM.',
     },
     silver: {
         "1": 
@@ -37,7 +45,12 @@ const messages = {
         'A foto é mais significativa, porque amei tanto fazer essa fantasia com vc\n'+
         'e ir na festa depois! Foi incrível demais, ainda mais você tão linda de\n'+
         'equipe rocket.',
-        "4": "Impressionante! Você tocou esta música com perfeição.",
+        "4": "Gastei horas demais nesse joguinho, mas por você cada segundo valeu\n"+
+        'a pena. Espero que tenha gostado bastante do enigma também, pensei em\n'+
+        'fazer outro enigma, mas acho que eu iria estar quebrando alguma lei,\n'+
+        'depois você me pergunta sobre...\n'+
+        'Espero que seu dia esteja sendo ótimo! Não sei se ainda é seu aniversário\n'+
+        'mas de qualquer jeito espero que esteja tendo um ótimo dia. Amo-te.',
     },
     bronze: {
         "1": 
@@ -47,6 +60,7 @@ const messages = {
         "Sobre esse joguinho, eu estava pensando em fazer um pro seu\n"+
         "aniversário tem um tempo mas foi só esse ano que decidi fazer um de ritmo,\n"+
         "que você gosta tanto (e é melhor que eu). Espero que goste!",
+        
         "2": 
         "Não podia fazer um jogo de música e esquecer do Rock in Rio que nós fomos!\n"+
         "Foi meu primeiro show grande, e foi incrível demais...\n"+
@@ -54,17 +68,24 @@ const messages = {
         "(Se eu não me engano foi essa música kkkkk) ainda lembro como me arrepiei todo\ne me senti incrível!\n"+
         "Mas a melhor parte desse dia foi estar lá com você!\n"+
         "Obrigado demais por me convencer a ir com vc :D",
+        
         "3": 
         "Mds, essa música é muito grande kkkkkkkk\nEspero que não seja chato para você jogar ela toda :D\n"+
         'Além disso, escolhi essa foto porque foi a mais emo q encontrei\n'+
         'a gente todo de preto, combinou bem.',
-        "4": "Impressionante! Você tocou esta música com perfeição.",
+        
+        "4": 
+        "Você já falou várias vezes que essa é sua música favorita, ela não podia faltar.\n"+
+        'Só faltou falarem que Schweinfurt neva também, achei um preconceito com a Europa...\n'+
+        'Mas independente disso, você sabe que está na minha cabeça 100% do tempo que estou\n'+
+        'aqui e espero que fique ao meu lado quando as estações mudarem e eu voltar pro Brasil.\n'+
+        'Te amo.',
     },
     wood: {
-        "1": "Poxa amor, nem se esforçou né? Ou não entendeu direito alguma coisa?\nEnfim, boa sorte, sei que você consegue melhor que isso!!",
+        "1": "Aperte as teclas de acordo com a música!\nSei que vai conseguir mais do que isso.",
         "2": "Aiai, acho que eu com dor nas costas voltando\ndo rock in rio jogaria melhor...",
         "3": "Sei que você é emo, mas se ficar chorando\nenquanto joga não vai muito longe, amor.",
-        "4": "Impressionante! Você tocou esta música com perfeição.",
+        "4": "You might be a young woman, but don't need to fall that hard.",
     },
 };
 

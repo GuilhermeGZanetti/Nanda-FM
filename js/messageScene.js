@@ -25,7 +25,7 @@ export default class messageScene extends Phaser.Scene {
                 break;
             case 4:
                 this.song_name = "Mind over Matter";
-                this.medal = this.getMedal(this.score, 608*50);
+                this.medal = this.getMedal(this.score, 384*50);
                 break;
         }
     }

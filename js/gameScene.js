@@ -29,7 +29,7 @@ export default class gameScene extends Phaser.Scene {
         this.key_is_pressed = Array(100).fill(false);;
 
         this.array_inputs = []
-        this.start_delay = [0, 1450, 3000, 1100, 1000];
+        this.start_delay = [0, 1450, 3000, 1100, 1800];
         
         this.score = 0;
         this.qtdErros = 0;
@@ -76,7 +76,7 @@ export default class gameScene extends Phaser.Scene {
                 this.load.text('inputs_song', 'assets/song_inputs/bulletproof_heart_inputs.txt');
                 break;
             case 4:
-                this.load.image('bg', 'assets/gray_bg.png');
+                this.load.image('bg', 'assets/mind.png');
                 this.load.audio('song_file', ['assets/songs/mind_over_matter.mp3', 'assets/songs/mind_over_matter.ogg']);
                 this.load.text('inputs_song', 'assets/song_inputs/mind_over_matter_inputs.txt');
                 break;
