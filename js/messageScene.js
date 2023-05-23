@@ -84,9 +84,9 @@ export default class messageScene extends Phaser.Scene {
     getMedal(score, maxScore) {
         const percentage = score / maxScore;
       
-        if (percentage >= 0.8) {
+        if (percentage >= 0.7) {
             return "gold";
-        } else if (percentage >= 0.5) {
+        } else if (percentage >= 0.4) {
             return "silver";
         } else if (percentage >= 0.0) {
             return "bronze";
